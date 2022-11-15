@@ -1,0 +1,23 @@
+﻿
+<div>
+    <form asp-controller="Home" asp-action="Index" class="form-control" method="post">
+        <div class="my-4 w-100">
+            <label for="name">Isim</label>
+            <input autocomplete="off" required class="w-100" type="text" name="name" />
+        </div>
+        <div class="my-4 w-100">
+            <label for="email">Email</label>
+            <input autocomplete="off" required class="w-100" type="email" name="email" />
+        </div>
+        <div class="my-4 w-100">
+            <label for="subject">Konu</label>
+            <input autocomplete="off" required class="w-100" type="text" name="subject" />
+        </div>
+        <div class="my-4 w-100">
+            <textarea autocomplete="off" required class="w-100" rows="15" placeholder="Lutfen mesajinizi yaziniz"></textarea>
+        </div>
+        <div class="text-center w-100">
+            <button class="btn btn-primary w-50 mb-4">Send</button>
+        </div>
+    </form>
+</div>

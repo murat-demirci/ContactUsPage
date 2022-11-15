@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]Contact</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container d-flex justify-content-center">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Contact</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script>
+
+        $("form").submit(e => {
+            e.preventDefault();
+            name = $("input[name=name]").val().trim();
+            subject = $("input[name=subject]").val().trim();
+            email = $("input[name=email]").val().trim();
+            body = $("textarea").val().trim();
+            
+            if (name == null || name.length == 0) {
+                alert("Lutfen isim alanini doldurunuz");
+            }
+            else if (subject == null || subject.length == 0) {
+                alert("Lutfen Konu alanini doldurunuz");
+            }
+            else if (body == null || body.length == 0) {
+                alert("Lutfen Mesaj alanini doldurunuz");
+            }
+            else {
+                $("input[type=text]").val("");
+                $("input[type=email]").val("");
+                $("textarea").val("");
+                $.ajax({
+                    url: 'Home/Index',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: { name, email, subject, body },
+                    success: function (data) {
+                        alert("Mesajiniz Basariyla Gonderildi", data.Message);
+                    },
+                    error: function (err) {
+                        console.log(err)
+                        alert("Beklenmedik bir hata gerceklesti");
+                    }
+                });
+                
+            }
+        })
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
